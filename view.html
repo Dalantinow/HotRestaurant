@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>View.html</title>
+    <!-- Latest compiled and minified CSS & JS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="jumbotron">
+            <h1>Current Reservations and Waiting List</h1>
+            <hr>
+            <a href="/make"><button class="btn btn-danger btn-lg"><span class="fa fa-plus"></span> Add New
+                    Reservation</button></a>
+            <a href="/"><button class="btn btn-secondary btn-lg"><span class="fa fa-plus"></span> Home</button></a>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3><strong>Current Reservations</strong></h3>
+                    </div>
+                    <div class="card-body">
+                        <div id="tables">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3><strong>Waiting List</strong></h3>
+                    </div>
+                    <div class="card-body">
+                        <div id="waiting">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $.get("/api/reservations", function (data) {
+            console.log(data);
+            for (var i = 0; i < data.length; i++) {
+
+                var tableDiv = $("<div class='jawn'>");
+                var id = data[i].id;
+                var pOne = $("<p>").text("ID: " + id);
+                tableDiv.append(pOne);
+                var name = data[i].name;
+                var pTwo = $("<p>").text("Name: " + name);
+                tableDiv.append(pTwo);
+                var email = data[i].email;
+                var pThree = $("<p>").text("Email: " + email);
+                tableDiv.append(pThree);
+                var phone = data[i].phone;
+                var pFour = $("<p>").text("Phone: " + phone);
+                tableDiv.append(pFour)
+                $("#tables").append(tableDiv)
+            }
+        })
+        $.get("/api/waitlist", function (data) {
+            console.log(data);
+            for (var i = 0; i < data.length; i++) {
+
+                var tableDiv = $("<div class='jawn'>");
+                var id = data[i].id;
+                var pOne = $("<p>").text("ID: " + id);
+                tableDiv.append(pOne);
+                var name = data[i].name;
+                var pTwo = $("<p>").text("Name: " + name);
+                tableDiv.append(pTwo);
+                var email = data[i].email;
+                var pThree = $("<p>").text("Email: " + email);
+                tableDiv.append(pThree);
+                var phone = data[i].phone;
+                var pFour = $("<p>").text("Phone: " + phone);
+                tableDiv.append(pFour);
+                $("#waiting").append(tableDiv)
+
+
+            }
+        })
+    </script>
+</body>
+
+</html>
